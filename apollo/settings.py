@@ -25,7 +25,7 @@ SECRET_KEY = 'h0*^2t7sr0ro59*+j(&ox#i4307nozw(!h1b=bdf5-@98v1=#c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['apollo-env.nyhbvjudat.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
