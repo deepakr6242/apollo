@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>JavaScript file upload</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+function startRead() {
+    //obtain input element through DOM  
+    var file = document.getElementById('file').files[0];
+
+    // console.log(typeof(file));
+    var filename = (file.name)
+    if (file) {
+       getAsText(file);
+    }
+
+
+
+    
+}
+function getAsText(readFile) {
+    var reader;
+    try {
+        reader = new FileReader();
+    } catch (e) {
+        document.getElementById('output').innerHTML = "Error: seems File API is not supported on your browser";
+        return;
+    }
+    // Read file into memory as UTF-8      
+    reader.readAsText(readFile, "UTF-8");
+    // handle success and errors
+
+    reader.onload = loaded;
+    reader.onerror = errorHandler;
+}
+
+function loaded(evt) {
+    // Obtain the read file data    
+    var fileString = evt.target.result;
+    new_data=[]
+    // document.getElementById('output').innerHTML = fileString;
+    console.log(fileString)
+    console.log(document.getElementById('file').files[0].name)
+    $.ajax({
+    url: "data/",
+    type: "post", 
+    data: fileString,
+    success: function(data) {
+
+        new_data.push(data);
+
+    }});
+
+    var a = document.getElementById('file');
+    if(a.value == "")
+    {
+        fileLabel.innerHTML = "Choose file";
+    }
+    else
+    {
+        var theSplit = a.value.split('\\');
+        // alert(new_data)
+        fileLabel.innerHTML = "Name of the Uploaded File is :"+ theSplit[theSplit.length-1]+" "+new_data;
+    }
+
+
+    
+
+}
+function errorHandler(evt) {
+    if (evt.target.error.code == evt.target.error.NOT_READABLE_ERR) {
+        // The file could not be read
+        document.getElementById('output').innerHTML = "Error reading file..."
+    }
+}
+</script>
+</head>
+<body>
+  <div><input type='file' title="Choose a video please" id="file" name="file" onchange="startRead()"><label id="fileLabel">Choose file</label></div>
+</pre>
+</body>
+<style>
+input[type=file]{
+    width:90px;
+    color:transparent;
+}
+</style>
+</html>

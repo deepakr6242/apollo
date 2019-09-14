@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<pre>Structured Data </pre><input id="file" size="60" type="file" class="custom-file-upload" name="file" multiple="" onchange="startRead()" >
+<script type="text/javascript">
+	function startRead(){
+	console.log("changed")	
+	document.geElementById('file').style.display='none';
+	}
+	
+</script>
+
+<style type="text/css">
+	input[type="file"] {
+  
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+</style>
+</body>
+</html>
