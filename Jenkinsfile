@@ -5,6 +5,11 @@ pipeline {
       steps {
         sh 'echo running stageA'
       }
+      
+          stage('stage B') {
+      steps {
+        sh 'echo running stageB'
+      }
     }
   }
 }
